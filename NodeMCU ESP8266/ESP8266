@@ -1,0 +1,191 @@
+//Neccesary libraries for the proyect.
+#include <ESP8266HTTPClient.h>
+#include <ArduinoJson.h>
+#include <ESP8266WiFi.h>
+#include <WiFiClient.h> 
+#include <SoftwareSerial.h>
+
+
+int contconexion = 0;  //variable that will be used for the conexion to WIFI.
+int id_individual = 2455910;  // ID individual; this is the ID for my (from Tlacaelel) WIFI module.
+unsigned long previousMillis = 0;
+unsigned char RX_data = 0;
+unsigned char charCont = 0;
+signed char numMedicine = 1;
+unsigned char FLG = 0;
+
+//struct for receiving data (the medicines, hour, etc.)
+typedef struct{
+  String name;
+  String amount;
+  unsigned char period;
+  unsigned char length;
+  unsigned char hour;
+}medicine_t;
+
+medicine_t medicine[3];
+
+//Struc for the send of Data (the data that will be send are the BPM, IBI, etc.
+typedef struct{
+  unsigned char BPM;
+  unsigned char IBI;
+  int hour;
+}monitor_t;
+monitor_t monitors[2];   //2 "arrays" for the structure showed before
+//End of the structur for sending data
+
+
+//Data that is neccessary for make correctly the conexion
+char host[48];
+String strhost = "192.168.0.10";
+String strurl = "/proyecto/ArchivosPHP/analisis_datos.php";
+
+
+
+//Function that will let us sending data to the data base
+String enviardatos(String datos) {
+  String linea = "error";
+  WiFiClient client;
+  strhost.toCharArray(host, 49);
+  if (!client.connect(host, 80)) {
+    Serial.println("Fallo de conexion");
+    return linea;
+  }
+  client.print(String("POST ") + strurl + " HTTP/1.1" + "\r\n" + 
+               "Host: " + strhost + "\r\n" +
+               "Accept: */*" + "*\r\n" +
+               "Content-Length: " + datos.length() + "\r\n" +
+               "Content-Type: application/x-www-form-urlencoded" + "\r\n" +
+               "\r\n" + datos);           
+  delay(10);             
+  
+  Serial.print("Enviando datos a SQL...");
+  
+  unsigned long timeout = millis();
+  while (client.available() == 0) {
+    if (millis() - timeout > 5000) {
+      Serial.println("Cliente fuera de tiempo!");
+      client.stop();
+      return linea;
+    }
+  }
+  // Lee todas las lineas que recibe del servidro y las imprime por la terminal serial
+  while(client.available()){
+    linea = client.readStringUntil('\r');
+  }  
+  Serial.println(linea);
+  return linea;
+}
+//End of the function for sending data
+
+
+    /* ******************************************************* SETUP FUNCTION ************************************************************** */
+void setup() {
+  Serial.begin(9600);
+  /* The next code is for the conexion to WIFI using NodeMCU ESP8266 WIFI Module*/
+  WiFi.begin("Ubee4AB2-2.4G", "6F38FA4AB2");   //name and password for the WI-FI modem
+  while (WiFi.status() != WL_CONNECTED and contconexion <50) { //Count 'till 50, if the conexion hasn't been done, cancel it
+    ++contconexion;
+    delay(500);
+    Serial.print(".");
+  }
+  if (contconexion <50) {                 //if the conexion is stablished 
+    //use a localIP
+    IPAddress ip(192,168,0, 4); 
+    IPAddress gateway(192,168,1,254); 
+    IPAddress subnet(255,255,255,0); 
+    WiFi.config(ip, gateway, subnet); 
+    Serial.println("");
+    Serial.println("WiFi conectado");
+    Serial.println(WiFi.localIP());
+  }
+  else {
+    Serial.println("");
+    Serial.println("Error de conexion");
+  }
+  //This is the end of the code that let us connect to WIFI through the NodeMcu ESP8266
+
+
+  //Code that will let us get the data from a DataBase; this data is about the medicine that the doctor should take.
+  const size_t capacity = JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(6) + 110;
+  DynamicJsonDocument doc(capacity);
+  const char* json = "[{\"medicina\":\"Omeprazol\",\"cantidad\":\"2 tabletas\",\"periodo\":\"4\",\"duracion\":\"7\",\"id_recibir\":null,\"hora\":\"9\"}]";
+
+  deserializeJson(doc, json);     
+
+  JsonObject root_0 = doc[0];
+  const char* root_0_medicina = root_0["medicina"]; // "Paracetamol"
+  const char* root_0_cantidad = root_0["cantidad"]; // "1 tableta"
+  const char* root_0_periodo = root_0["periodo"]; // "8"
+  const char* root_0_duracion = root_0["duracion"]; // "7 dias"
+  const char* root_0_hora = root_0["hora"]; // "09:00:00"
+  medicine[0].name = root_0_medicina;                                  //get data from JSON
+  medicine[0].amount = root_0_cantidad;                               //get data from JSON
+  medicine[0].period = *root_0_periodo - 48;                          //get data from JSON
+  medicine[0].length = *root_0_duracion - 48;                         //get data from JSON
+  medicine[0].hour = *root_0_hora -48;                                //get data from JSON
+  Serial.println(" ");
+  monitors[0].hour = 100000;                                          //10 am
+  monitors[1].hour = 180000;                                          //6 pm
+  
+  //For the moment, we initialize the data that will be send to the data base (BPM, IBI, ETC.).
+  //monitors[0].BPM = 75;
+  //monitors[0].IBI = 85;
+  
+
+ //enviardatos("id_individual= " + String(id_individual) + "&hora1= " + String(monitors[0].hour) + "&BPM1= " + String(monitors[0].BPM) + "&IBI1= " + String(monitors[0].IBI) + "&hora2= " + String(monitors[1].hour) + "&BPM2= " + String(monitors[1].BPM) + "&IBI2= " + String(monitors[1].IBI));  
+}
+/* ***************************************************************** LOOP ********************************************* */
+void loop() {
+    if(Serial.available() > 0){
+    RX_data = Serial.read();
+  }
+  
+  if(RX_data == 0x0A){                                      //COMMAND THAT INITIALIZES DATA TO K64F
+    delay(5);
+    do{
+        charCont = 0;
+        while(medicine[0].name[charCont] != '\0'){
+          Serial.write(medicine[0].name[charCont]);
+          delay(5);
+          charCont++;
+        }
+        Serial.write(0x0A);
+        charCont = 0;
+        while(medicine[0].amount[charCont] != '\0'){
+          Serial.write(medicine[0].amount[charCont]);
+          delay(5);
+          charCont++;
+        }
+        Serial.write(0x0A);
+        delay(5);
+        Serial.write(medicine[0].period);
+        Serial.write(0x0A);
+        delay(5);
+        Serial.write(medicine[0].length);
+        Serial.write(0x0A);
+        delay(5);
+        Serial.write(medicine[0].hour);
+        Serial.write(0x0A);
+        delay(5);
+        numMedicine--;
+    }while(numMedicine > 0);
+    
+    RX_data = 0x00;
+  }
+   if(RX_data == 0x0B){                                  //COMMAND THAT RECEIVES MONITORING DATA FROM K64F
+    charCont = 0;
+    while(charCont < 2){
+      while(Serial.available() == 0);
+        monitors[charCont].BPM = Serial.read();
+      while(Serial.available() == 0);
+        monitors[charCont].IBI = Serial.read();
+      while(Serial.available() == 0);
+        monitors[charCont].hour = Serial.read();
+      charCont++;
+    }
+    RX_data = 0x00;
+    FLG = 1;
+    enviardatos("id_individual= " + String(id_individual) + "&hora1= " + String(monitors[0].hour) + "&BPM1= " + String(monitors[0].BPM) + "&IBI1= " + String(monitors[0].IBI) + "&hora2= " + String(monitors[1].hour) + "&BPM2= " + String(monitors[1].BPM) + "&IBI2= " + String(monitors[1].IBI));  
+  }
+}
