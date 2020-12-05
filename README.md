@@ -77,4 +77,3 @@ PINES USED IN THE SYSTEM
 *   PTE26     *	    GPIO          * 	INTERNAL GREEN LED TO INDICATE PENDING MONITOR ALARM       *
 ****************************************************************************************************
 
-
