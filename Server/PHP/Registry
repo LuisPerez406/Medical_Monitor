@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: blue; text-align: center; margin-top: 200px;">
+<?php
+$conexion = mysqli_connect('localhost','root','root');
+mysqli_select_db($conexion,"proyecto"); 
+if(!$conexion){ 
+    die('La conexion no se ha podido realizar.'.mysqli_error());
+}
+else{
+    session_start();   //recibimos id
+    $ID= $_SESSION['id'];
+    $id_paciente = $_POST["id_paciente"];
+    $_SESSION['id_paciente']=$id_paciente; //almacenamos id del paciente (dispositivo)en session
+    $nombre = $_POST["nombre"];
+    $apellido_paterno = $_POST["apellido_paterno"];
+    $apellido_materno = $_POST["apellido_materno"];
+    $f_nacimiento = $_POST["f_nacimiento"];
+    $curp = $_POST["curp"];
+    $edad = $_POST["edad"];
+    $sexo = $_POST["sexo"];
+    $edo_civil = $_POST["edo_civil"];
+    $nacionalidad = $_POST["nacionalidad"];
+    $pais = $_POST["pais"];
+    $ciudad = $_POST["ciudad"];
+    $telefono = $_POST["telefono"];
+    $celular = $_POST["celular"];
+    $email = $_POST["email"];
+    $calle = $_POST["calle"];
+    $num_calle = $_POST["num_calle"];
+    $calle1 = $_POST["calle1"];
+    $calle2 = $_POST["calle2"];
+    $colonia = $_POST["colonia"];
+    $cp = $_POST["cp"];
+    $nombre_familiar = $_POST["nombre_familiar"];
+    $apellidos_familiar = $_POST["apellidos_familiar"];
+    $curp_familiar = $_POST["curp_familiar"];
+    $parentesco = $_POST["parentesco"];
+    $f_nacimiento_familiar = $_POST["f_nacimiento_familiar"];
+    $edad_familiar = $_POST["edad_familiar"];
+    $sexo_familiar = $_POST["sexo_familiar"];
+    $edo_civil_familiar = $_POST["edo_civil_familiar"];
+    $nacionalidad_f = $_POST["nacionalidad_f"];
+    $pais_f = $_POST["pais_f"];
+    $ciudad_f = $_POST["ciudad_f"];
+    $telefono_f = $_POST["telefono_f"];
+    $celular_f = $_POST["celular_f"];
+    $email_f = $_POST["email_f"];
+    $calle_f = $_POST["calle_f"];
+    $num_calle_f = $_POST["num_calle_f"];
+    $calle1_f = $_POST["calle1_f"];
+    $calle2_f = $_POST["calle2_f"];
+    $colonia_f = $_POST["colonia_f"];
+    $cp_f = $_POST["cp_f"];
+    $numero_seguro_social = $_POST["nss"];
+    $afiliacion = $_POST["afiliacion"];
+    $tipo_sangre = $_POST["tipo_sangre"];
+    $alergias = $_POST["alergias"];
+    $alergias_medicas = $_POST["alergias_medicas"];
+    $problemas_salud_cronicos = $_POST["problemas_salud_cronicos"];
+    $antecedentes_familiares = $_POST["antecedentes_familiares"];
+if($ID == 17110224){
+
+    $ins = "INSERT INTO pacientes1 (id, nombre, apellido_paterno, apellido_materno, f_nacimiento, curp, edad, sexo, edo_civil, nacionalidad, pais, ciudad, telefono, celular, email, calle, num_calle, calle1, calle2, colonia, cp, nombre_familiar, apellidos_familiar, curp_familiar, parentesco, f_nacimiento_familiar, edad_familiar, sexo_familiar, edo_civil_familiar, nacionalidad_f, pais_f, ciudad_f, telefono_f, celular_f, email_f, calle_f, num_calle_f, calle1_f, calle2_f, colonia_f, cp_f, afiliacion, tipo_sangre, alergias, alergias_medicas, problemas_salud_cronicos, antecedentes_familiares, id_medico1, numero_seguridad_social)
+    VALUES ('$id_paciente', '$nombre', '$apellido_paterno', '$apellido_materno', '$f_nacimiento', '$curp', '$edad', '$sexo', '$edo_civil', '$nacionalidad', '$pais', '$ciudad', '$telefono', '$celular', '$email', '$calle', '$num_calle', '$calle1', '$calle2', '$colonia', '$cp', '$nombre_familiar', '$apellidos_familiar', '$curp_familiar', '$parentesco', '$f_nacimiento_familiar', '$edad_familiar', '$sexo_familiar', '$edo_civil_familiar', '$nacionalidad_f', '$pais_f', '$ciudad_f', '$telefono_f', '$celular_f', '$email_f', '$calle_f', '$num_calle_f', '$calle1_f', '$calle2_f', '$colonia_f', '$cp_f', '$afiliacion', '$tipo_sangre', '$alergias', '$alergias_medicas', '$problemas_salud_cronicos', '$antecedentes_familiares', '$ID', '$numero_seguro_social')";
+    
+    if($conexion->query($ins) == TRUE){ 
+        echo "Registrado Exitosamente";
+    }
+    else{
+        echo "Error";
+    }
+      
+    
+        $consulta2 = mysqli_query($conexion,"SELECT * FROM medicos WHERE id= $ID");
+        $n=mysqli_fetch_array($consulta2);
+        
+    
+?>
+
+<br>
+<form action="../../proyecto/ArchivosPHP/ingreso.php" method="POST">
+   
+    <?php
+    echo '<input type="text" name="registro" disabled=disabled class="form-control  value="'.$n['id'].'" placeholder="'.$n['id'].'">';
+    echo '<input type="text" value="'.$n['id'].'" name="registro" hidden>';
+    
+    echo '<input type="text" name="contra" disabled=disabled class="form-control  value="'.$n['pass'].'" placeholder="'.$n['pass'].'">';
+    echo '<input type="text" value="'.$n['pass'].'" name="contra" hidden>';
+
+    ?>
+     <input style="color: white; background-color: black; font: oblique bold 15px arial;
+     border: 5px inset dark-blue; border-radius: 20px" type="submit" value="Aceptar">
+</form>
+<?php
+}
+
+
+
+
+
+if($ID == 17110236){
+
+    $ins = "INSERT INTO pacientes2 (id, nombre, apellido_paterno, apellido_materno, f_nacimiento, curp, edad, sexo, edo_civil, nacionalidad, pais, ciudad, telefono, celular, email, calle, num_calle, calle1, calle2, colonia, cp, nombre_familiar, apellidos_familiar, curp_familiar, parentesco, f_nacimiento_familiar, edad_familiar, sexo_familiar, edo_civil_familiar, nacionalidad_f, pais_f, ciudad_f, telefono_f, celular_f, email_f, calle_f, num_calle_f, calle1_f, calle2_f, colonia_f, cp_f, nss, afiliacion, tipo_sangre, alergias, alergias_medicas, problemas_salud_cronicos, antecedentes_familiares, id_medico2)
+    VALUES ('$id_paciente', '$nombre', '$apellido_paterno', '$apellido_materno', '$f_nacimiento', '$curp', '$edad', '$sexo', '$edo_civil', '$nacionalidad', '$pais', '$ciudad', '$telefono', '$celular', '$email', '$calle', '$num_calle', '$calle1', '$calle2', '$colonia', '$cp', '$nombre_familiar', '$apellidos_familiar', '$curp_familiar', '$parentesco', '$f_nacimiento_familiar', '$edad_familiar', '$sexo_familiar', '$edo_civil_familiar', '$nacionalidad_f', '$pais_f', '$ciudad_f', '$telefono_f', '$celular_f', '$email_f', '$calle_f', '$num_calle_f', '$calle1_f', '$calle2_f', '$colonia_f', '$cp_f', '$numero_seguro_social', '$afiliacion', '$tipo_sangre', '$alergias', '$alergias_medicas', '$problemas_salud_cronicos', '$antecedentes_familiares', '$ID')";
+    
+    if($conexion->query($ins) == TRUE){ 
+        echo "Registrado Exitosamente";
+    }
+    else{
+        echo "Error";
+    }
+
+    $consulta2 = mysqli_query($conexion,"SELECT * FROM medicos WHERE id= $ID");
+    $n=mysqli_fetch_array($consulta2);
+    
+
+?>
+
+<br>
+<form action="../../proyecto/ArchivosPHP/ingreso.php" method="POST">
+
+<?php
+echo '<input type="text" name="registro" disabled=disabled class="form-control  value="'.$n['id'].'" placeholder="'.$n['id'].'">';
+echo '<input type="text" value="'.$n['id'].'" name="registro" hidden>';
+echo '<input type="text" name="contra" disabled=disabled class="form-control  value="'.$n['pass'].'" placeholder="'.$n['pass'].'">';
+echo '<input type="text" value="'.$n['pass'].'" name="contra" hidden>';
+?>
+ <input style="color: white; background-color: black; font: oblique bold 15px arial;
+ border: 5px inset dark-blue; border-radius: 20px" type="submit" value="Aceptar">
+</form>
+
+<?php
+
+}
+
+}
+mysqli_close($conexion);
+?>
+</body>
+</html>
