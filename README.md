@@ -71,7 +71,7 @@ PINES USED IN THE SYSTEM
 *   PTC16     *   UART3_RX        *     UART RX                                                    *
 *   PTC17     *   UART3_TX        *     UART TX                                                    *
 *   PTD0      *	  SPI0_PCS0       *	PROTOCOL SIGNAL                                            *
-*   PTD1      *	  SPI0_SCK	  *	PROTOCOL SIGNAL                                            *        
+*   PTD1      *	  SPI0_SCK	  *	PROTOCOL SIGNAL                                            *
 *   PTD2      *	  SPI0_SOUT	  *	PROTOCOL SIGNAL                                            *
 *   PTD3      *	  SPI0_SIN        *	PROTOCOL SIGNAL 				           *
 *   PTE26     *	    GPIO          * 	INTERNAL GREEN LED TO INDICATE PENDING MONITOR ALARM       *
