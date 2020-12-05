@@ -1,0 +1,60 @@
+html{
+    background-color: blue;
+}
+header{
+    text-align: center;
+    font-size: xx-large;
+    background-color: black;
+    color: white;
+}
+form{
+    background-color: blueviolet;
+    font-size: xx-large;
+    border: 10px inset black;
+    border-radius: 20px ;
+    margin-left: 450px;
+    margin-right: 450px;
+    margin-top: 100px;
+    opacity: .75;
+}
+
+.correo{
+    background-repeat: no-repeat;
+    text-align: center;
+    font-size: 30px;
+    margin-left: 30px;
+    background-size: contain;
+    border: 5px inset black;
+    border-radius: 20px;
+}
+.contra{
+    background-image: url(https://i0.pngocean.com/files/778/12/983/computer-icons-skype-icon-design-clip-art-change-password.jpg);
+    background-repeat: no-repeat;
+    text-align: center;
+    font-size: 30px;
+    margin-left: 30px;
+    background-size: contain;
+    border: 5px inset black;
+    border-radius: 20px;
+}
+
+.boton{
+    font-size: x-large;
+    text-align: center;
+    color: crimson;
+    background-color: cyan;
+    border: 5px inset darkblue;
+    border-radius: 30px;
+    margin-left: 150px;
+}
+.boton2{
+    font-size: x-large;
+    text-align: center;
+    text-decoration: none;
+    color: crimson;
+    background-color: cyan;
+    border: 5px inset darkblue;
+    border-radius: 30px;
+    margin-left: 150px;
+    margin-top: 200px;
+}
