@@ -1,0 +1,32 @@
+html{
+    background-color: darkgray;
+}
+header{
+    text-align: center;
+    color: white;
+    font-size: xx-large;
+    text-shadow: 20px 20px 15px black;
+    background-color: rgb(81, 45, 214);
+    background-image: url(https://static.vix.com/es/sites/default/files/m/medicina-doctores-tecnologia.jpg);
+    background-repeat: repeat-y;
+    background-size: contain;
+    border: 5px inset rgb(81, 45, 214);
+}
+nav{
+    text-align: right;
+    font-size: x-large;
+    color: white;
+    background-color: darkblue;
+}
+p{
+    font: normal 100 25px "Courier New";
+}
+.titulo_imagenes{
+    font: oblique 130 20px "courier new";
+    margin-left: 80px;
+}
+
+.imagenes{
+    margin-left: 80px;
+    width: 600px;
+}
