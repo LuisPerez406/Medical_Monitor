@@ -76,3 +76,5 @@ PINES USED IN THE SYSTEM
 *   PTD3      *	  SPI0_SIN        *	PROTOCOL SIGNAL 				           *
 *   PTE26     *	    GPIO          * 	INTERNAL GREEN LED TO INDICATE PENDING MONITOR ALARM       *
 ****************************************************************************************************
+
+
