@@ -39,14 +39,14 @@ MEDICAL PRESCRIPTION
 
 	MEDICATION DOSE SCHEDULE
 	*********************************************************
-	*   		Frecuency	        *	       Scheluded hours	    *
-	*								          *						                  *
-	*		  Cada 4 horas		    *                             *
-	*		  Cada 6 horas		    *                             *   
-	*		  Cada 12 horas		    *                             * 
-	*		  Cada 24 horas		    *                             *	Each Breakfast/Lunch/Dinner
-	*		  Cada 48 horas		    *                             *  
-	*		  Cada 72 horas		    *                             * 
+	*       Frecuency         *	 Scheluded hours	*
+	*			  *				*
+	*    Cada 4 horas	  *                             *
+	*    Cada 6 horas	  *                             *   
+	*    Cada 12 horas	  *                             * 
+	*    Cada 24 horas	  *                             *	Each Breakfast/Lunch/Dinner
+	*    Cada 48 horas	  *                             *  
+	*    Cada 72 horas        *                             * 
 	*                         *                             *
 	*********************************************************
 	Scheduled hours according to the common availability of the patient.
@@ -58,20 +58,21 @@ BOTH are expected to work between 9:00 and 21:00 hours.
 
 PINES USED IN THE SYSTEM
 
-	****************************************************************************************************
-	*	   PIN      *   ASSIGNMENT	  *					DESCRIPTION				                                       *
-	*	 		        *						      *	 									                                               *
-	*   PTA4      *     GPIO        *   PUSH BUTTON TO START MONITOR                                   *
-	*	  PTB2	    *		ADC0_SE12	    *		PULSE SIGNAL                            	                     *
-	*	  PTB10	    *		  GPIO			  *		BUZZER TO INDICATE ALARM                                       *
-	*	  PTB22	    *		  GPIO			  *		INTERNAL RED LED TO INDICATE BPM                               *
-	*   PTC0      *     GPIO        *   DC (OLED)                                                      *
-	*   PTC2      *     GPIO        *   RESET (OLED)                                                   *
-	*   PTC16     *   UART3_RX      *   UART RX                                                        *
-	*   PTC17     *   UART3_TX      *   UART TX                                                        *
-	*	  PTD0	    *		SPI0_PCS0		  *		PROTOCOL SIGNAL                                                *
-	*  	PTD1	    *		SPI0_SCK		  *		PROTOCOL SIGNAL                                                *        
-	*	  PTD2      *		SPI0_SOUT		  *		PROTOCOL SIGNAL                                                *
-	*	  PTD3	    *		SPI0_SIN		  *		PROTOCOL SIGNAL 				                                       *
-	*	  PTE26     *		GPIO			    * 	INTERNAL GREEN LED TO INDICATE PENDING MONITOR ALARM           *
-	****************************************************************************************************
+****************************************************************************************************
+*   PIN       *   ASSIGNMENT	  *			  DESCRIPTION		                   *
+*	      *                   *                                                                *
+*	      *                   *                                                                *
+*   PTA4      *     GPIO          *     PUSH BUTTON TO START MONITOR                               *
+*   PTB2      *   ADC0_SE12	  *	PULSE SIGNAL                            	           *
+*   PTB10     *	    GPIO	  *	BUZZER TO INDICATE ALARM                                   *
+*   PTB22     *	    GPIO	  *     INTERNAL RED LED TO INDICATE BPM                           *
+*   PTC0      *     GPIO          *     DC (OLED)                                                  *
+*   PTC2      *     GPIO          *     RESET (OLED)                                               *
+*   PTC16     *   UART3_RX        *     UART RX                                                    *
+*   PTC17     *   UART3_TX        *     UART TX                                                    *
+*   PTD0      *	  SPI0_PCS0       *	PROTOCOL SIGNAL                                            *
+*   PTD1      *	  SPI0_SCK	  *	PROTOCOL SIGNAL                                            *        
+*   PTD2      *	  SPI0_SOUT	  *	PROTOCOL SIGNAL                                            *
+*   PTD3      *	  SPI0_SIN        *	PROTOCOL SIGNAL 				           *
+*   PTE26     *	    GPIO          * 	INTERNAL GREEN LED TO INDICATE PENDING MONITOR ALARM       *
+****************************************************************************************************
