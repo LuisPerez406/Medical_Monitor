@@ -1,0 +1,60 @@
+html{
+    background-color: cornflowerblue;
+}
+header{
+    text-align: center;
+    color: white;
+    font-size: x-large;
+    text-shadow: 20px 20px 15px black;
+    background-color: rgb(81, 45, 214);
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/f/f4/IMSS.jpg);
+    background-repeat: repeat-y;
+    background-size: contain;
+    border: 5px inset rgb(81, 45, 214);
+    /* box-shadow: 20px 20px 15px black; */
+}
+nav{
+    text-align: right;
+    font-size: x-large;
+    color:blueviolet;
+     background-color: black; 
+}
+main{
+    margin-top: 50px;
+    margin-right: 450px;
+    border: 5px inset rgb(81, 45, 214);
+    background-color: wheat;
+}
+.Texto1{
+    font: normal 100 25px arial;
+
+}
+.Img1{
+    width: 650px;
+    margin-left: 80px;
+    border:5px inset lawngreen;
+}
+footer{
+    background-color: rgb(96, 154, 248);
+    margin-top: 20px;
+}
+.texto_final_1{
+    margin-left: 350px;
+    margin-top: -200px;
+    color: white;
+    text-decoration: none;
+}
+.texto_final_2{
+    margin-left: 700px;
+    margin-top: -150px;
+    color: white;
+}
+.texto_final_3{
+    margin-left: 1020px;
+    margin-top: -280px;
+}
+.ImgPiePagina{
+    background-color: rgb(96, 154, 248);
+    width: 300px;
+    margin-top: 130px;
+}
