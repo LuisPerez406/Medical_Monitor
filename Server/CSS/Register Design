@@ -1,0 +1,35 @@
+html{
+    background-image: url(https://s1.eestatic.com/2020/06/03/curiosidades/Curiosidades_494961313_153077108_1706x960.jpg);
+     background-size: cover; 
+}
+header{
+    text-align: center;
+    font-size: xx-large;
+    color: black;
+}
+form{
+    border: 5px blue inset;
+    margin-right: 80px;
+    margin-left: 80px;
+}
+div{
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    margin-right: 20px;
+}
+.titulos_campos{
+    color: darkred;
+    font-size: 40px;
+    text-align: center;
+}
+.titulo_secundario{
+    color: darkred;
+    font-size: 30px;
+    margin-left: 25px;
+    opacity: 80%;
+}
+.campos{
+    width: 300px;
+    height: 20px;
+}
